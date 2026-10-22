@@ -10,7 +10,7 @@
 
 - **安全修复**：PHP 升级至 8.5.12 / 8.4.27 / 8.3.36（修复 CVE-2026-109618 / CVE-2026-109619）
 - **移除漏洞版本**：删除 PHP 7.3 / 7.4 / 8.1 / 8.2 的 Dockerfile 与 CI 工作流
-- **新增 PHP 8.5**：Alpine 3.24 上的 base 与 Swoole 6.2.2 / 6.2.3 镜像
+- **新增 PHP 8.5**：Alpine 3.24 上的 base 与 Swoole 6.2.2 镜像
 - **账号更名**：镜像命名空间及相关引用统一改为 ryx16
 
 ## Docker 下开发
@@ -29,7 +29,7 @@ docker run --name easyswoole \
 -p 9501:9501 -it \
 --privileged -u root \
 --entrypoint /bin/sh \
-ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.3
+ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2
 ```
 
 你可以选择公共镜像： 
@@ -47,7 +47,6 @@ ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.3
 #### php 8.5
 
 - `ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2`
-- `ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.3`
 
 ### 安全状态说明（CVE-2026-109618 / CVE-2026-109619）
 
@@ -56,7 +55,7 @@ ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.3
 
 **✅ 已修复（无漏洞，推荐使用）**
 
-- `ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2/6.2.3`
+- `ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2`
 - `ryx16/easyswoole:php8.4.27-alpine3.24-swoole5.1.2/5.1.6`
 - `ryx16/easyswoole:php8.3.36-alpine3.24-swoole5.1.2/5.1.6`
 
@@ -90,7 +89,7 @@ php easyswoole.php server start
 
 -   8.5.12: php 版本，支持 8.3/8.4/8.5，推荐 8.5.12
 -   3.24: alpine 系统版本，支持 alpine 3.24，推荐 3.24
--   6.2.3: php swoole 扩展版本
+-   6.2.2: php swoole 扩展版本
 
 支持的 `Dockerfile` 文件链接:
 
@@ -107,7 +106,7 @@ php easyswoole.php server start
 ### php 8.5.12
 
 -   [`php8.5.12-alpine3.24-base`](https://github.com/ryx16/easyswoole-docker/tree/main/dockerfiles/php8/8.5.12/alpine/3.24/base/Dockerfile)
--   [`php8.5.12-alpine3.24-swoole-*`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.5.12/alpine/3.24/swoole/Dockerfile)，[`php8.5.12-alpine3.24-swoole6.2.3`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.5.12/alpine/3.24/swoole/6.2.3/Dockerfile)
+-   [`php8.5.12-alpine3.24-swoole-*`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.5.12/alpine/3.24/swoole/Dockerfile)，[`php8.5.12-alpine3.24-swoole6.2.2`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.5.12/alpine/3.24/swoole/6.2.2/Dockerfile)
 
 ## 快速查看
 

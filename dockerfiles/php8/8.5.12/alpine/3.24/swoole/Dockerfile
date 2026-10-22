@@ -1,4 +1,4 @@
-# Build image for ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.3
+# Build image for ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2
 #
 # @link     https://www.easyswoole.com
 # @document https://www.easyswoole.com
@@ -13,7 +13,7 @@ COPY LICENSE /LICENSE
 ##
 # ---------- env settings ----------
 ##
-# --build-arg SWOOLE_VERSION=6.2.3 COMPOSER_VERSION=2.3.10
+# --build-arg SWOOLE_VERSION=6.2.2 COMPOSER_VERSION=2.3.10
 ARG SWOOLE_VERSION
 ARG COMPOSER_VERSION
 
@@ -21,7 +21,7 @@ ARG COMPOSER_VERSION
 # ---------- env settings ----------
 ##
 ENV PHP_BUILD_VERSION="85"
-ENV SWOOLE_VERSION=${SWOOLE_VERSION:-"6.2.3"} \
+ENV SWOOLE_VERSION=${SWOOLE_VERSION:-"6.2.2"} \
     COMPOSER_VERSION=${COMPOSER_VERSION:-"2.3.10"} \
     #  install and remove building packages
     PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make php${PHP_BUILD_VERSION}-dev php${PHP_BUILD_VERSION}-pear pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake libaio-dev openssl-dev curl-dev"
