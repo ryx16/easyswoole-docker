@@ -1,4 +1,4 @@
-# Build image for ryx16/easyswoole:php8.4.27-alpine3.24-swoole5.1.2
+# Build image for ryx16/easyswoole:php8.4.27-alpine3.24-swoole6.2.2
 #
 # @link     https://www.easyswoole.com
 # @document https://www.easyswoole.com
@@ -14,7 +14,7 @@ COPY LICENSE /LICENSE
 # ---------- env settings ----------
 ##
 ENV PHP_BUILD_VERSION="84"
-ENV SWOOLE_VERSION="5.1.2" \
+ENV SWOOLE_VERSION="6.2.2" \
     COMPOSER_VERSION="2.3.10" \
     #  install and remove building packages
     PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make php${PHP_BUILD_VERSION}-dev php${PHP_BUILD_VERSION}-pear pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake libaio-dev openssl-dev curl-dev"
@@ -38,7 +38,7 @@ RUN set -ex \
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-openssl --enable-swoole-curl --enable-cares --enable-swoole-pgsql \
+        && ./configure --enable-swoole-curl --enable-cares --enable-swoole-pgsql \
         && make -s -j$(nproc) && make install \
     ) \
     && echo "memory_limit=1G" > /etc/php${PHP_BUILD_VERSION}/conf.d/00_default.ini \

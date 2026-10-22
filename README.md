@@ -11,6 +11,7 @@ Major changes in this fork:
 - **Security fix**: upgraded PHP to 8.5.12 / 8.4.27 / 8.3.36 (fixes CVE-2026-109618 / CVE-2026-109619)
 - **Vulnerable versions removed**: PHP 7.3 / 7.4 / 8.1 / 8.2 Dockerfiles and CI workflows deleted
 - **PHP 8.5 added**: base and Swoole 6.2.2 images on Alpine 3.24
+- **Swoole build fixes**: PHP 8.4 uses Swoole 6.2.2 (5.1.x cannot compile against PHP 8.4); PHP 8.5 uses Swoole 6.2.2 (6.2.3 has an upstream compile regression)
 - **Rebranded**: image namespace and references updated to `ryx16`
 
 ## Develop in Docker
@@ -41,8 +42,7 @@ The public images you can choose from:
 
 #### php 8.4
 
-- `ryx16/easyswoole:php8.4.27-alpine3.24-swoole5.1.2`
-- `ryx16/easyswoole:php8.4.27-alpine3.24-swoole5.1.6`
+- `ryx16/easyswoole:php8.4.27-alpine3.24-swoole6.2.2`
 
 #### php 8.5
 
@@ -56,7 +56,7 @@ The public images you can choose from:
 **✅ Fixed (no vulnerability, recommended)**
 
 - `ryx16/easyswoole:php8.5.12-alpine3.24-swoole6.2.2`
-- `ryx16/easyswoole:php8.4.27-alpine3.24-swoole5.1.2/5.1.6`
+- `ryx16/easyswoole:php8.4.27-alpine3.24-swoole6.2.2`
 - `ryx16/easyswoole:php8.3.36-alpine3.24-swoole5.1.2/5.1.6`
 
 > **Vulnerable versions removed** (2026-10-22): all vulnerable images (PHP 7.3.33 / 7.4.33 / 8.1.x / 8.2.x) have been deleted from this repository — their Dockerfiles and CI workflows are removed, and only the fixed versions above are built and published. If you previously pulled any old vulnerable tag, remove it locally and switch to the fixed images.
@@ -88,7 +88,7 @@ tag format:
 
 -   8.5.12: php version, support 8.3/8.4/8.5, Recommend 8.5.12
 -   3.24: alpine version, support alpine 3.24, recommend 3.24
--   6.2.2: swoole version
+-   6.2.2: swoole version (8.4 / 8.5); 5.1.2 / 5.1.6: swoole version (8.3)
 
 support:
 
@@ -100,7 +100,7 @@ support:
 ### php 8.4.27
 
 -   [`php8.4.27-alpine3.24-base`](https://github.com/ryx16/easyswoole-docker/tree/main/dockerfiles/php8/8.4.27/alpine/3.24/base/Dockerfile)
--   [`php8.4.27-alpine3.24-swoole-*`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.4.27/alpine/3.24/swoole/Dockerfile), [`php8.4.27-alpine3.24-swoole5.1.6`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.4.27/alpine/3.24/swoole/5.1.6/Dockerfile)
+-   [`php8.4.27-alpine3.24-swoole-*`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.4.27/alpine/3.24/swoole/Dockerfile), [`php8.4.27-alpine3.24-swoole6.2.2`](https://github.com/ryx16/easyswoole-docker/blob/main/dockerfiles/php8/8.4.27/alpine/3.24/swoole/6.2.2/Dockerfile)
 
 ### php 8.5.12
 
