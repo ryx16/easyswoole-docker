@@ -34,6 +34,8 @@ Major changes in this fork:
 
 **Evaluated, not adopted** — Alpine 3.25 is unreleased (empty release directory, no `3.25-stable` aports branch); PHP 8.6 has no `php86` package in Alpine 3.24, so 8.6 images would fail to build.
 
+**CI** — the four workflow files (`publish_base_alpine_image.yml` and `publish_versioned_alpine_image_php83/84/85.yml`) are merged into `publish_alpine_images.yml`, where `build_versioned_alpine_images` declares `needs: build_base_alpine_images`. Previously all four triggered independently on the same push, so the Swoole builds started before their `FROM ryx16/php:…-base` image was published and failed with `not found`. Both matrices now run with `fail-fast: false` so one platform failure no longer cancels the remaining legs.
+
 ## Develop in Docker
 
 If your native environment does not meet the EasySwoole system requirements, or if you are unfamiliar with system configuration, you can run and develop the EasySwoole project as follows using Docker.

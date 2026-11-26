@@ -34,6 +34,8 @@
 
 **已评估、暂不采用** —— Alpine 3.25 尚未发布（发布目录为空，aports 无 `3.25-stable` 分支）；Alpine 3.24 没有 `php86` 软件包，故 PHP 8.6 镜像无法构建。
 
+**CI 调整** —— 把 `publish_base_alpine_image.yml` 与 `publish_versioned_alpine_image_php83/84/85.yml` 四个文件合并为 `publish_alpine_images.yml`，其中 `build_versioned_alpine_images` 声明 `needs: build_base_alpine_images`。此前四个工作流在同一次 push 下各自独立起跑，Swoole 镜像的构建早于它所依赖的 `FROM ryx16/php:…-base` 发布，因而报 `not found` 失败；两个矩阵同时改为 `fail-fast: false`，避免某一架构失败时连带取消其余构建。
+
 ## Docker 下开发
 
 假设您的本机环境并不能达到 `EasySwoole` 的环境要求，或对于环境配置不是那么熟悉，那么您可以通过以下方法来运行及开发 `EasySwoole` 项目：

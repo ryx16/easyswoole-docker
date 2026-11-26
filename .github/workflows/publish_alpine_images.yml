@@ -1,0 +1,103 @@
+name: Build Alpine Images for EasySwoole
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build_base_alpine_images:
+    runs-on: ubuntu-22.04
+    if: github.repository == 'ryx16/easyswoole-docker'
+    name: The Base Alpine Image For EasySwoole PHP-${{ matrix.php }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php-prefix: "8"
+            php: "8.3.37"
+            alpine: "3.24"
+          - php-prefix: "8"
+            php: "8.4.28"
+            alpine: "3.24"
+          - php-prefix: "8"
+            php: "8.5.13"
+            alpine: "3.24"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image ryx16/php:${{ matrix.php }}-alpine${{ matrix.alpine }}-base
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: dockerfiles/php${{ matrix.php-prefix }}/${{ matrix.php }}/alpine/${{ matrix.alpine }}/base/Dockerfile
+          platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ryx16/php:${{ matrix.php }}-alpine${{ matrix.alpine }}-base
+
+  build_versioned_alpine_images:
+    needs: build_base_alpine_images
+    runs-on: ubuntu-22.04
+    if: github.repository == 'ryx16/easyswoole-docker'
+    name: The Alpine Image For EasySwoole PHP-${{ matrix.php }} Swoole-${{ matrix.swoole }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: "8.3.37"
+            alpine: "3.24"
+            swoole: "5.1.6"
+          - php: "8.3.37"
+            alpine: "3.24"
+            swoole: "6.2.6"
+          - php: "8.4.28"
+            alpine: "3.24"
+            swoole: "6.2.6"
+          - php: "8.5.13"
+            alpine: "3.24"
+            swoole: "6.2.6"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image ryx16/easyswoole:php${{ matrix.php }}-alpine${{ matrix.alpine }}-swoole${{ matrix.swoole }}
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: dockerfiles/php8/${{ matrix.php }}/alpine/${{ matrix.alpine }}/swoole/${{ matrix.swoole }}/Dockerfile
+          platforms: linux/amd64,linux/arm64/v8
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ryx16/easyswoole:php${{ matrix.php }}-alpine${{ matrix.alpine }}-swoole${{ matrix.swoole }}
