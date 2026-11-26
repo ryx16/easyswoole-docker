@@ -12,9 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - php: 8.4.27
+          - php: 8.4.28
             alpine: 3.24
-            swoole: "6.2.2"
+            swoole: "6.2.6"
 
     name: The Alpine Image For EasySwoole PHP-${{ matrix.php }} Swoole-${{ matrix.swoole }}
 

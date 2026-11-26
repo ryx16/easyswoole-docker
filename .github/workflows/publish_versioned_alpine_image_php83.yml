@@ -12,10 +12,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - php: 8.3.36
+          - php: 8.3.37
             alpine: 3.24
-            swoole: "5.1.2"
-          - php: 8.3.36
+            swoole: "6.2.6"
+          - php: 8.3.37
             alpine: 3.24
             swoole: "5.1.6"
 
